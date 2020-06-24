@@ -1,9 +1,14 @@
 package com.robsonaraujo.jhb.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Test {
@@ -13,6 +18,9 @@ public class Test {
 	private int id;
 	
 	private String name;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent", cascade = CascadeType.ALL)
+	private List<TestFilha> filhas;
 
 	public int getId() {
 		return id;
@@ -28,5 +36,13 @@ public class Test {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<TestFilha> getFilhas() {
+		return filhas;
+	}
+
+	public void setFilhas(List<TestFilha> filhas) {
+		this.filhas = filhas;
 	}
 }
